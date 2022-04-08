@@ -33,6 +33,11 @@
         <input type="text" id="description" v-model="form5.description" />
       </div>
     </div>
+    <div>
+      <p>refとv-model(更新ロジックは子にしか書けない)</p>
+      {{ form6 }}
+      <custom-form-4 v-model:form="form6" />
+    </div>
   </div>
 </template>
 
@@ -41,6 +46,7 @@ import { defineComponent, reactive, ref } from "vue";
 import CustomForm from "../../components/form/CustomForm.vue";
 import CustomForm2 from "../../components/form/CustomForm2.vue";
 import CustomForm3 from "../../components/form/CustomForm3.vue";
+import CustomForm4 from "../../components/form/CustomForm4.vue";
 import { useState } from "../../composables/use-state";
 
 type Task = {
@@ -50,7 +56,7 @@ type Task = {
 };
 
 export default defineComponent({
-  components: { CustomForm, CustomForm2, CustomForm3 },
+  components: { CustomForm, CustomForm2, CustomForm3, CustomForm4 },
 
   setup() {
     // refとemit(更新ロジックは子)
@@ -108,6 +114,12 @@ export default defineComponent({
       status: null,
     });
 
+    const form6 = ref<Task>({
+      name: null,
+      description: null,
+      status: null,
+    });
+
     return {
       form,
       onUpdate,
@@ -118,6 +130,7 @@ export default defineComponent({
       form4,
       onUpdate4,
       form5,
+      form6,
     };
   },
 });
